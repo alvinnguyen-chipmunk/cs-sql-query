@@ -1,1 +1,1 @@
-# CHIPMUNK SQL LIBRARY
+# Chipmunk SQL library

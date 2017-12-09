@@ -7,7 +7,7 @@ EXTRA_DIST = autogen.sh INSTALL
 
 # ============= Document and ChangeLog =============== #
 
-dist_doc_DATA = AUTHORS COPYING NEWS README ChangeLog
+dist_doc_DATA = AUTHORS COPYING NEWS README.md ChangeLog
 
 MAINTAINERCLEANFILES = ChangeLog
 
