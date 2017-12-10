@@ -10,5 +10,5 @@ Name: CHIPMUNK SQL QUERY LIBRARY
 Description: A library that will helping query data from SQL server.
 Requires:
 Version: @VERSION@
-Libs: -L${libdir} -lcssqlquery
-Cflags: -I${includedir}
+Libs: -L${libdir} -lcssqlquery @MYSQL_CONFIG_LIBS@
+Cflags: -I${includedir} @MYSQL_CONFIG_CFLAGS@
