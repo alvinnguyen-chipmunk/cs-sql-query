@@ -1,16 +1,17 @@
 /*******************************************************************************
- *  (C) Copyright 2009 STYL Solutions Co., Ltd. , All rights reserved          *
+ *  (C) Copyright 2017 Chipmunk Solutions Co., Ltd. , All rights reserved      *
  *                                                                             *
  *  This source code and any compilation or derivative thereof is the sole     *
- *  property of STYL Solutions Co., Ltd. and is provided pursuant to a         *
+ *  property of Chipmunk Solutions Co., Ltd. and is provided pursuant to a     *
  *  Software License Agreement.  This code is the proprietary information      *
- *  of STYL Solutions Co., Ltd and is confidential in nature.  Its use and     *
- *  dissemination by any party other than STYL Solutions Co., Ltd is           *
+ *  of Chipmunk Solutions Co., Ltd and is confidential in nature.  Its use and *
+ *  dissemination by any party other than Chipmunk Solutions Co., Ltd is       *
  *  strictly limited by the confidential information provisions of the         *
  *  Agreement referenced above.                                                *
  ******************************************************************************/
 
-/** @file cs_sql.h
+/**
+ *  @file cs_sql.h
  *  @brief Function prototypes for the C swapper for mysql API
  *         with doxygen format.
  *
@@ -25,8 +26,8 @@
  *  @Copyright	GNU Public License.
  */
 
-#ifndef CSEXAMPLE_HELLO_H_INCLUDED
-#define CSEXAMPLE_HELLO_H_INCLUDED
+#ifndef CS_SQL_H_INCLUDED
+#define CS_SQL_H_INCLUDED
 #ifdef __cplusplus
 extern "C"
 {
@@ -91,7 +92,7 @@ CS_SQL_OBJ * cs_sql_new(const char *host, const char *user, const char *passwd);
      */
 void cs_sql_finalize(CS_SQL_OBJ * cs_spl_object);
 
-#endif // CSEXAMPLE_HELLO_H_INCLUDED
+#endif // CS_SQL_H_INCLUDED
 #ifdef __cplusplus
 }
 #endif

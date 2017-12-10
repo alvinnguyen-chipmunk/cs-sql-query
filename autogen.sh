@@ -58,7 +58,7 @@ __check__()
 		exit 1
 	}
 
-	__INFO__ "=============== Checking action was completed.  ==============+"
+	__INFO__ "=============== Checking action was completed.  ==============="
 }
 
 __execute__()
