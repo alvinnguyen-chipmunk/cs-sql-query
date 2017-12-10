@@ -98,7 +98,8 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_cs_sql_test_OBJECTS = cs_sql_test-cs_sql_test.$(OBJEXT)
 cs_sql_test_OBJECTS = $(am_cs_sql_test_OBJECTS)
-cs_sql_test_DEPENDENCIES =
+am__DEPENDENCIES_1 =
+cs_sql_test_DEPENDENCIES = $(am__DEPENDENCIES_1)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -201,8 +202,6 @@ EGREP = @EGREP@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 GIT = @GIT@
-GLIB_CFLAGS = @GLIB_CFLAGS@
-GLIB_LIBS = @GLIB_LIBS@
 GREP = @GREP@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
@@ -214,14 +213,16 @@ LDFLAGS = @LDFLAGS@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
-LIBUDEV_CFLAGS = @LIBUDEV_CFLAGS@
-LIBUDEV_LIBS = @LIBUDEV_LIBS@
 LIPO = @LIPO@
 LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
 MAKEINFO = @MAKEINFO@
 MANIFEST_TOOL = @MANIFEST_TOOL@
 MKDIR_P = @MKDIR_P@
+MYSQL_CONFIG = @MYSQL_CONFIG@
+MYSQL_CONFIG_CFLAGS = @MYSQL_CONFIG_CFLAGS@
+MYSQL_CONFIG_CPPFLAGS = @MYSQL_CONFIG_CPPFLAGS@
+MYSQL_CONFIG_LIBS = @MYSQL_CONFIG_LIBS@
 NM = @NM@
 NMEDIT = @NMEDIT@
 OBJDUMP = @OBJDUMP@
@@ -236,9 +237,6 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
-PKG_CONFIG = @PKG_CONFIG@
-PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
-PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
 RANLIB = @RANLIB@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
@@ -300,8 +298,11 @@ top_srcdir = @top_srcdir@
 @DEBUG_FALSE@DEBUG_CFLAGS = 
 @DEBUG_TRUE@DEBUG_CFLAGS = -g -ggdb
 cs_sql_test_SOURCES = cs_sql_test.c
-cs_sql_test_CFLAGS = $(DEBUG_CFLAGS) -std=c99 -D_BSD_SOURCE -D_DEFAULT_SOURCE -I$(top_srcdir)/src/include
-cs_sql_test_LDADD = -lcssql -L./../src
+cs_sql_test_CPPFLAGS = $(MYSQL_CONFIG_CPPFLAGS)
+cs_sql_test_CFLAGS = $(DEBUG_CFLAGS) -std=c99 -D_BSD_SOURCE -D_DEFAULT_SOURCE -I$(top_srcdir)/src/include \
+					 -Wall $(MYSQL_CONFIG_CFLAGS)
+
+cs_sql_test_LDADD = -lcssql -L./../src $(MYSQL_CONFIG_LIBS)
 all: all-am
 
 .SUFFIXES:
@@ -423,18 +424,18 @@ distclean-compile:
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
 
 cs_sql_test-cs_sql_test.o: cs_sql_test.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cs_sql_test_CFLAGS) $(CFLAGS) -MT cs_sql_test-cs_sql_test.o -MD -MP -MF $(DEPDIR)/cs_sql_test-cs_sql_test.Tpo -c -o cs_sql_test-cs_sql_test.o `test -f 'cs_sql_test.c' || echo '$(srcdir)/'`cs_sql_test.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cs_sql_test_CPPFLAGS) $(CPPFLAGS) $(cs_sql_test_CFLAGS) $(CFLAGS) -MT cs_sql_test-cs_sql_test.o -MD -MP -MF $(DEPDIR)/cs_sql_test-cs_sql_test.Tpo -c -o cs_sql_test-cs_sql_test.o `test -f 'cs_sql_test.c' || echo '$(srcdir)/'`cs_sql_test.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/cs_sql_test-cs_sql_test.Tpo $(DEPDIR)/cs_sql_test-cs_sql_test.Po
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='cs_sql_test.c' object='cs_sql_test-cs_sql_test.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cs_sql_test_CFLAGS) $(CFLAGS) -c -o cs_sql_test-cs_sql_test.o `test -f 'cs_sql_test.c' || echo '$(srcdir)/'`cs_sql_test.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cs_sql_test_CPPFLAGS) $(CPPFLAGS) $(cs_sql_test_CFLAGS) $(CFLAGS) -c -o cs_sql_test-cs_sql_test.o `test -f 'cs_sql_test.c' || echo '$(srcdir)/'`cs_sql_test.c
 
 cs_sql_test-cs_sql_test.obj: cs_sql_test.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cs_sql_test_CFLAGS) $(CFLAGS) -MT cs_sql_test-cs_sql_test.obj -MD -MP -MF $(DEPDIR)/cs_sql_test-cs_sql_test.Tpo -c -o cs_sql_test-cs_sql_test.obj `if test -f 'cs_sql_test.c'; then $(CYGPATH_W) 'cs_sql_test.c'; else $(CYGPATH_W) '$(srcdir)/cs_sql_test.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cs_sql_test_CPPFLAGS) $(CPPFLAGS) $(cs_sql_test_CFLAGS) $(CFLAGS) -MT cs_sql_test-cs_sql_test.obj -MD -MP -MF $(DEPDIR)/cs_sql_test-cs_sql_test.Tpo -c -o cs_sql_test-cs_sql_test.obj `if test -f 'cs_sql_test.c'; then $(CYGPATH_W) 'cs_sql_test.c'; else $(CYGPATH_W) '$(srcdir)/cs_sql_test.c'; fi`
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/cs_sql_test-cs_sql_test.Tpo $(DEPDIR)/cs_sql_test-cs_sql_test.Po
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='cs_sql_test.c' object='cs_sql_test-cs_sql_test.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cs_sql_test_CFLAGS) $(CFLAGS) -c -o cs_sql_test-cs_sql_test.obj `if test -f 'cs_sql_test.c'; then $(CYGPATH_W) 'cs_sql_test.c'; else $(CYGPATH_W) '$(srcdir)/cs_sql_test.c'; fi`
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cs_sql_test_CPPFLAGS) $(CPPFLAGS) $(cs_sql_test_CFLAGS) $(CFLAGS) -c -o cs_sql_test-cs_sql_test.obj `if test -f 'cs_sql_test.c'; then $(CYGPATH_W) 'cs_sql_test.c'; else $(CYGPATH_W) '$(srcdir)/cs_sql_test.c'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo

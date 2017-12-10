@@ -40,6 +40,13 @@ extern "C"
 int main(int argc, char const *argv[])
 {
 	helloWorld(1,2);
+
+	CS_SQL_OBJ * cs_sql_obj = NULL;
+
+    cs_sql_obj = cs_sql_new("127.0.0.1", "root", "chipmunk");
+
+    cs_sql_finalize(cs_sql_obj);
+
 	return 0;
 }
 

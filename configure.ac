@@ -1,4 +1,4 @@
-AC_INIT([CS-SQL-QUERY], [0.0.1], [khuong.linux@gmail.com])
+AC_INIT([CS_SQL], [0.0.1], [khuong.linux@gmail.com])
 AC_CONFIG_SRCDIR([configure.ac])
 
 # Version information
@@ -53,19 +53,39 @@ AC_TYPE_OFF_T
 AC_TYPE_SIZE_T
 AC_STRUCT_TM
 
-# LIBUDEV checks
-udev_module="libudev"
-PKG_CHECK_MODULES(LIBUDEV, [$udev_module])
-AC_SUBST(LIBUDEV_CFLAGS)
-AC_SUBST(LIBUDEV_LIBS)
-LIBUDEV_VERSION=`$PKG_CONFIG --modversion ${udev_module}`
+## LIBUDEV checks
+#udev_module="libudev"
+#PKG_CHECK_MODULES(LIBUDEV, [$udev_module])
+#AC_SUBST(LIBUDEV_CFLAGS)
+#AC_SUBST(LIBUDEV_LIBS)
+#LIBUDEV_VERSION=`$PKG_CONFIG --modversion ${udev_module}`
+#
+## Glib-2.0 checks
+#glib_modules="glib-2.0"
+#PKG_CHECK_MODULES([GLIB], [$glib_modules])
+#AC_SUBST(GLIB_CFLAGS)
+#AC_SUBST(GLIB_LIBS)
+#GLIB_VERSION=`$PKG_CONFIG --modversion ${glib_modules}`
 
-# Glib-2.0 checks
-glib_modules="glib-2.0"
-PKG_CHECK_MODULES([GLIB], [$glib_modules])
-AC_SUBST(GLIB_CFLAGS)
-AC_SUBST(GLIB_LIBS)
-GLIB_VERSION=`$PKG_CONFIG --modversion ${glib_modules}`
+# Check MYSQL library
+AC_PATH_PROG([MYSQL_CONFIG], [mysql_config])
+AS_IF([test "x$MYSQL_CONFIG" = "x"],
+    [ AC_MSG_ERROR([mysql_config is required to build.])]
+    ,
+    [ MYSQL_CONFIG_CFLAGS=`$MYSQL_CONFIG --cflags`,
+      MYSQL_CONFIG_CPPFLAGS=`$MYSQL_CONFIG --include`
+      MYSQL_CONFIG_LIBS=`$MYSQL_CONFIG --libs`
+      AC_SUBST([MYSQL_CONFIG_CFLAGS])
+      AC_SUBST([MYSQL_CONFIG_CPPFLAGS])
+      AC_SUBST([MYSQL_CONFIG_LIBS])
+    ])
+
+AS_IF([test "x$enable_doc" != "xno"],[AC_PATH_PROG([DOXYGEN], [doxygen])])
+AS_IF([test "x$DOXYGEN" != "x"],
+		[AS_IF([test "x$enable_doc" = "xyes"],
+			[AC_MSG_ERROR([You need Doxygen to build API documentation])
+		])
+     ])
 
 dnl ================================================================
 

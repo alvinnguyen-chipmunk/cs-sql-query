@@ -40,11 +40,56 @@ extern "C"
 int
 helloWorld( int arg_1, int arg_2 )
 {
-        printf("ARGS 1: %d - ARGS 2: %d\n", arg_1, arg_2);
-        return 0;
+    printf("ARGS 1: %d - ARGS 2: %d\n", arg_1, arg_2);
+    return 0;
 }
+
+/********** NEW ***************************************************************/
+CS_SQL_OBJ *
+cs_sql_new(const char *host, const char *user, const char *passwd)
+{
+    CS_SQL_OBJ * cs_spl_object = NULL;
+
+    cs_spl_object = mysql_init(NULL);
+
+    if (cs_spl_object==NULL)
+    {
+        printf("Init faild, out of memory?");
+        return NULL;
+    }
+
+    if (mysql_real_connect(cs_spl_object,      /* MYSQL structure to use */
+                            host,               /* server hostname or IP address */
+                            user,               /* mysql user */
+                            passwd,             /* password */
+                            NULL,               /* default database to use, NULL for none */
+                            0,                  /* port number, 0 for default */
+                            NULL,               /* socket file or named pipe name */
+                            0                   /* connection flags 0 for default*/
+                            ))
+    {
+        printf("Connecting SQL server success.");
+    }
+    else
+    {
+        printf("Connecting SQL server failure.");
+    }
+
+    return cs_spl_object;
+}
+
+/********** FINALIZE **********************************************************/
+void
+cs_sql_finalize(CS_SQL_OBJ * cs_spl_object)
+{
+    if(cs_spl_object==NULL)
+        return;
+
+    mysql_close(cs_spl_object);
+    printf("Close SQL server connection success.");
+}
+
 #ifdef __cplusplus
 }
 #endif
-
 /** @} */ // end of groupTemplate
