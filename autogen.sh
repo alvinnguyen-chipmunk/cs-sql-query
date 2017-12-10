@@ -1,10 +1,16 @@
 #!/bin/bash
 # Run this to generate all the initial makefiles, etc.
 
+BLUE='\033[1;34m'
+GREEN='\033[1;32m'
+YELLOW='\033[1;33m'
+RED='\033[1;31m'
+CLEAN='\033[0m'
+
 srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
 
-MYSELF="${0}"
+MYSELF=$(basename ${0})
 
 __check__()
 {
@@ -117,11 +123,11 @@ __help__()
 
 __ERROR__()
 {
-	echo "[${MYSELF}] ERROR: ${1}"
+	echo -e "${RED}[${MYSELF}] ERROR: ${1}${CLEAN}"
 }
 __INFO__()
 {
-	echo "[${MYSELF}] INFO: ${1}"
+	echo -e "${GREEN}[${MYSELF}] INFO: ${1}${CLEAN}"
 }
 
 if [ ! -z "${1}" ]; then
