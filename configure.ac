@@ -75,17 +75,11 @@ AS_IF([test "x$MYSQL_CONFIG" = "x"],
     [ MYSQL_CONFIG_CFLAGS=`$MYSQL_CONFIG --cflags`,
       MYSQL_CONFIG_CPPFLAGS=`$MYSQL_CONFIG --include`
       MYSQL_CONFIG_LIBS=`$MYSQL_CONFIG --libs`
+      MYSQL_CONFIG_VERSION=`$MYSQL_CONFIG --version`      
       AC_SUBST([MYSQL_CONFIG_CFLAGS])
       AC_SUBST([MYSQL_CONFIG_CPPFLAGS])
       AC_SUBST([MYSQL_CONFIG_LIBS])
     ])
-
-AS_IF([test "x$enable_doc" != "xno"],[AC_PATH_PROG([DOXYGEN], [doxygen])])
-AS_IF([test "x$DOXYGEN" != "x"],
-		[AS_IF([test "x$enable_doc" = "xyes"],
-			[AC_MSG_ERROR([You need Doxygen to build API documentation])
-		])
-     ])
 
 dnl ================================================================
 
@@ -115,14 +109,6 @@ AM_CONDITIONAL([CS_DOC], [test "x$DOXYGEN" != "x"])
 AC_PATH_PROG([GIT], [git])
 AM_CONDITIONAL([CS_GIT], [test "x$GIT" != "x"])
 
-AC_ARG_ENABLE([blocking],[  --enable-blocking     Enable serial blocking for scanner device port.],
-[case "${enableval}" in
- 	yes) 	blocking=true ;;
-	no)  	blocking=false ;;
-  	*) 	AC_MSG_ERROR([bad value ${enableval} for --enable-blocking]) ;;
-esac],[blocking=false])
-AM_CONDITIONAL([BLOCKING], [test x$blocking = xtrue])
-
 dnl ================================================================
 
 AC_CONFIG_FILES([ Makefile src/Makefile tests/Makefile ])
@@ -134,7 +120,9 @@ dnl ================================================================
 echo "----------------------------------------------------------------"
 echo "----------------------------------------------------------------"
 echo ""
-echo "Install CS_SQL_QUERY in     : ${prefix}"
+echo "Install CS_SQL_QUERY in                       : ${prefix}"
+echo ""
+echo "Using MYSQLCLIENT library version             : ${MYSQL_CONFIG_VERSION}"
 echo ""
 echo "Configuration is done OK."
 echo ""
