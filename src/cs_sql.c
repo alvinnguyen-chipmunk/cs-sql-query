@@ -68,11 +68,11 @@ cs_sql_new(const char *host, const char *user, const char *passwd)
                             0                   /* connection flags 0 for default*/
                             ))
     {
-        printf("Connecting SQL server success.");
+        printf("Connecting SQL server success.\n");
     }
     else
     {
-        printf("Connecting SQL server failure.");
+        printf("Connecting SQL server failure.\n");
     }
 
     return cs_spl_object;
@@ -86,7 +86,7 @@ cs_sql_finalize(CS_SQL_OBJ * cs_spl_object)
         return;
 
     mysql_close(cs_spl_object);
-    printf("Close SQL server connection success.");
+    printf("Close SQL server connection success.\n");
 }
 
 #ifdef __cplusplus
